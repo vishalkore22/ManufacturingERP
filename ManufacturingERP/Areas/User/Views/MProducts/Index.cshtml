@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Manufacturing_Core.Entity.MProduct>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProdCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProdName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProdDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProdQty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProdImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsCreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsUpdatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsSynchronized)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProdCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProdName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProdDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProdQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProdImage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsCreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsUpdatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSynchronized)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PkProdId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PkProdId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PkProdId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

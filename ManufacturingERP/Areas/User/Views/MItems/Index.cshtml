@@ -1,0 +1,127 @@
+﻿@model Manufacturing_Core.ViewModels.MItemViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Message = TempData["Action"];
+}
+<div class="row container">
+    <div class="form-group">
+        <div class="card">
+            <div class="card-header text-white" style="width:80%; height:65px; background-color:orangered; margin-left:100px; margin-top:-30px;">View Item</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @if (ViewBag.Message == "Create")
+                        {
+                            <div class="alert alert-success">
+                                <strong>@TempData["AlertMessage"]</strong>
+                                <button type="button" class="close" data-dismiss="alert">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                        }
+                        else if (ViewBag.Message == "Edit")
+                        {
+                            <div class="alert alert-info">
+                                <strong>@TempData["AlertMessage"]</strong>
+                                <button type="button" class="close" data-dismiss="alert">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                        }
+                        else if (ViewBag.Message == "Delete")
+                        {
+                            <div class="alert alert-danger">
+                                <strong>@TempData["AlertMessage"]</strong>
+                                <button type="button" class="close" data-dismiss="alert">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="form-group">
+                        <p>
+                            <a asp-action="Create">Create New</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model=>model.mItem.PkItemId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.mItem.ItemCode)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.mItem.CategoryName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.mItem.ItemName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.mItem.ItemQty)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.mItem.ItemRate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.mItem.HSNCODE)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.mItem.SACODE)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.ListItems != null)
+                            {
+                                @foreach (var item in Model.ListItems)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PkItemId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ItemCode)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CategoryName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ItemName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ItemQty)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ItemRate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.HSNCODE)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SACODE)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.PkItemId">Edit</a> |
+                                            <a asp-action="Details" asp-route-id="@item.PkItemId">Details</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.PkItemId">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

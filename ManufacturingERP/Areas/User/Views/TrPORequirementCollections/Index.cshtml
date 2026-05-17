@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Manufacturing_Core.Entity.TrPORequirementCollection>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Message = TempData["Action"];
+}
+<div class="row container">
+    <div class="form-group">
+        <div class="col-sm-12 col-md-12 col-lg">
+            <div class="card">
+                <div class="card-header text-white" style="width:80%; height:65px; background-color:orangered; margin-left:100px; margin-top:-30px;">View Bank</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (ViewBag.Message == "Create")
+                            {
+                                <div class="alert alert-success">
+                                    <strong>@TempData["AlertMessage"]</strong>
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        <span>&times;</span>
+                                    </button>
+                                </div>
+                            }
+                            else if (ViewBag.Message == "Edit")
+                            {
+                                <div class="alert alert-info">
+                                    <strong>@TempData["AlertMessage"]</strong>
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        <span>&times;</span>
+                                    </button>
+                                </div>
+                            }
+                            else if (ViewBag.Message == "Delete")
+                            {
+                                <div class="alert alert-danger">
+                                    <strong>@TempData["AlertMessage"]</strong>
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        <span>&times;</span>
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <p>
+                            <a asp-action="Create">Create New</a>
+                        </p>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.RequirementNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.WorkOrderNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.BOMNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Material info")
+                                </th>
+                                
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RequirementNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.WorkOrderNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.BOMNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => (item.MatName))
+                                    </td>                                    
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.PkRequirementID">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.PkRequirementID">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.PkRequirementID">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+﻿@model Manufacturing_Core.Entity.MBank
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <form asp-action="Edit">
+        <div class="form-group">
+            <div class="col-sm-12 col-md-12 col-lg">
+                <div class="card">
+                    <div class="card-header text-white" style="width:80%; height:65px; background-color:orangered; margin-left:100px; margin-top:-30px;">Edit Bank</div>
+                    <div class="card-body">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <input type="hidden" asp-for="PkBankId" />
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg">
+                                <div class="form-group">
+                                    <label class="control-label" for="PkBankId" style="font-family:Verdana; font-weight:normal">Bank Sr.No.</label>
+                                    @Html.TextBox("Bank Sr.No.", Model.PkBankId, new { @class = "form-control", @readonly = "readonly" })
+                                    <span asp-validation-for="PkBankId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg">
+                                <div class="form-group">
+                                    <label asp-for="BankName" class="control-label" style="font-family:Verdana; font-weight:normal"></label>
+                                    <input asp-for="BankName" class="form-control" />
+                                    <span asp-validation-for="BankName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg">
+                                <div class="form-group">
+                                    <label asp-for="BranchName" class="control-label" style="font-family:Verdana; font-weight:normal"></label>
+                                    <input asp-for="BranchName" class="form-control" />
+                                    <span asp-validation-for="BranchName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg">
+                                <div class="form-group">
+                                    <label asp-for="IFSCCode" class="control-label" style="font-family:Verdana; font-weight:normal"></label>
+                                    <input asp-for="IFSCCode" class="form-control" />
+                                    <span asp-validation-for="IFSCCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg">
+                                <div class="form-group">
+                                    <label asp-for="MICRCode" class="control-label" style="font-family:Verdana; font-weight:normal"></label>
+                                    <input asp-for="MICRCode" class="form-control" />
+                                    <span asp-validation-for="MICRCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg">
+                                <div class="form-group">
+                                    <label asp-for="AccountNo" class="control-label" style="font-family:Verdana; font-weight:normal"></label>
+                                    <input asp-for="AccountNo" class="form-control" />
+                                    <span asp-validation-for="AccountNo" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg">
+                                <div class="form-group">
+                                    <label style="font-family:Verdana; font-weight:normal">Account Type Id</label>
+                                    <select asp-for="FkAccountTypeId" class="form-control" asp-items="ViewBag.FkAccountTypeId"></select>
+                                    <span asp-validation-for="FkAccountTypeId" class="text-danger"></span>
+                                </div>
+                            </div>                            
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Update" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,357 @@
+﻿@model Manufacturing_Core.ViewModels.PurchaseOrderViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+<script src="https://code.jquery.com/jquery-3.6.2.slim.js"
+             integrity="sha256-OflJKW8Z8amEUuCaflBZJ4GOg4+JnNh9JdVfoV+6biw="
+             crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.7/js/tether.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" language="javascript">
+var rowIndex = 0;
+
+function BtnAdd() {
+    var row = $("#RowTemplate").clone();
+
+    row.html(row.html().replace(/__index__/g, rowIndex));
+    row.removeAttr("id");
+
+    $("#Tbody").append(row);
+    rowIndex++;
+}
+
+    function BtnDel(btn) {
+    $(btn).closest("tr").remove();
+    GetTotal();
+}
+
+
+function Calc(el) {
+    var row = $(el).closest("tr");
+
+    var qty  = parseFloat(row.find(".qty").val()) || 0;
+    var rate = parseFloat(row.find(".rate").val()) || 0;
+
+    row.find(".amt").val(qty * rate);
+
+    GetTotal();
+}
+
+
+   function GetTotal() {
+    var sum = 0;
+
+    $(".amt").each(function () {
+        sum += parseFloat($(this).val()) || 0;
+    });
+
+    var gstP = parseFloat($("#FGstP").val()) || 0;
+    var gst  = (sum * gstP) / 100;
+
+    var discP = parseFloat($("#FDiscountP").val()) || 0;
+    var disc  = (sum * discP) / 100;
+
+    $("#FGst").val(gst.toFixed(2));
+    $("#FDiscount").val(disc.toFixed(2));
+    $("#FTotal, #FNetAmount").val((sum + gst - disc).toFixed(2));
+} 
+</script>
+<div class="row">
+    <form asp-action="Create">
+        <div class="col-sm-12 col-md-12 col-lg">
+                <div class="card">
+                    <div class="card-header text-white" style="width:80%; height:65px; background-color:orangered; margin-left:100px; margin-top:-30px;">Create Purchase Order</div>
+                    <div class="card-body">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="card">
+                            <div class="card-header">
+                                Purchase Order Information
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                            <div class="col-sm-4 col-md-4 col-lg">
+                                                <div class="form-group">
+                                                    <label class="control-label" style="font-family:Verdana; font-weight:normal">Purchase Order Id</label>
+                                                    @* <span class="input-group-text" id="input-poId">Purchase Order Id</span> *@
+                                                    <input asp-for="MPurchaseOrder.PO_ID" class="form-control" />
+                                                    <span asp-validation-for="MPurchaseOrder.PO_ID" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-4 col-lg">
+                                                <div class="form-group">
+                                                    <label class="control-label" style="font-family:Verdana; font-weight:normal">PO Number</label>
+                                                    <input asp-for="MPurchaseOrder.PO_Number" class="form-control" />
+                                                    <span asp-validation-for="MPurchaseOrder.PO_Number" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                <div class="row">
+                                    <div class="col-sm-4 col-md-4 col-lg">
+                                            <div class="form-group">
+                                                    <label class="control-label" style="font-family:Verdana; font-weight:normal">PO Date</label>
+                                                    <input asp-for="MPurchaseOrder.PO_Date" class="form-control" />
+                                                    <span asp-validation-for="MPurchaseOrder.PO_Date" class="text-danger"></span>
+                                            </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-lg">
+                                            <div class="form-group">
+                                                    <label class="control-label" style="font-family:Verdana; font-weight:normal">Supplier Name</label>
+                                                    @Html.DropDownList("MSupplier", ViewBag.SupplierNames as SelectList, "--Select Supplier--", new{@class="form-control", id="PkSupId", name="SupplierName"})
+                                                    @* <select asp-for="MPurchaseOrder.Supplier_ID" asp-items="ViewBag.SupplierDD" class="form-control" /> *@
+                                                    <span asp-validation-for="MPurchaseOrder.Supplier_ID" class="text-danger"></span>
+                                            </div>
+                                    </div>                                                                                        
+                                </div>  
+                                <div class="row">
+                                    <div class="col-sm-4 col-md-4 col-lg">
+                                        <div class="form-group">
+                                                    <label class="control-label" style="font-family:Verdana; font-weight:normal">Delivery Date</label>
+                                                    <input asp-for="MPurchaseOrder.Delivery_Date" class="form-control" />
+                                                    <span asp-validation-for="MPurchaseOrder.Delivery_Date" class="text-danger"></span>
+                                        </div>           
+                                    </div>                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        Material Details
+                    </div>
+                    <div class="card-body">
+                        <fieldset>
+                                <legend>Material Details</legend>
+
+                                <table class="table table-bordered">
+                                <thead class="table-dark">
+                                        <tr>
+                                            <th style="width:400px;">ID-Code-Name</th>
+                                            <th style="width:150px;">UOM</th>
+                                            <th style="width:150px;">Qty</th>
+                                            <th style="width:150px;">Rate</th>
+                                            <th style="width:150px;">Amount</th>
+                                            <th style="width:75px;" scope="col" class="no-print">
+                                                <button type="button" class="btn btn-success" onclick="BtnAdd()">Add Row</button>
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+<tbody id="Tbody"></tbody>
+</table>
+
+<table style="display:none">
+<tbody>
+<tr id="RowTemplate">
+    <td>
+        <select class="form-control material"
+                name="MPurchaseOrderDetails[index].MaterialID">
+            @foreach (var item in ViewBag.MaterialDD)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </td>
+
+    <td>
+        <input type="text" class="form-control uom"
+               name="MPurchaseOrderDetails[index].UOM" />
+    </td>
+
+    <td>
+        <input type="number" class="form-control qty"
+               name="MPurchaseOrderDetails[index].Quantity"
+               onchange="Calc(this)" />
+    </td>
+
+    <td>
+        <input type="number" class="form-control rate"
+               name="MPurchaseOrderDetails[index].Rate"
+               onchange="Calc(this)" />
+    </td>
+
+    <td>
+        <input type="number" class="form-control amt"
+               name="MPurchaseOrderDetails[index].Amount"
+               readonly />
+    </td>
+
+    <td>
+        <button type="button" class="btn btn-danger" onclick="BtnDel(this)">X</button>
+    </td>
+</tr>
+
+</tbody>
+</table>
+
+                                
+                            </fieldset>                            
+                            <fieldset>
+                                <legend>Calculations</legend>
+                            <div class="row">
+                                <div class="col-sm-4 col-md-4 col-lg">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-family:Verdana; font-weight:normal">GST %</label>
+                                        <input id="FGstP" asp-for="MPurchaseOrder.GSTPercentage" class="form-control" onchange=GetTotal()/>
+                                        <span asp-validation-for="MPurchaseOrder.GSTPercentage" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-4 col-lg">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-family:Verdana; font-weight:normal">GST Amount</label>
+                                        <input id="FGst" asp-for="MPurchaseOrder.GSTAmount" class="form-control" />
+                                        <span asp-validation-for="MPurchaseOrder.GSTAmount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 col-md-4 col-lg">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-family:Verdana; font-weight:normal">Discount %</label>
+                                        <input id="FDiscountP" asp-for="MPurchaseOrder.Discount" class="form-control" onchange="GetTotal()"/>
+                                        <span asp-validation-for="MPurchaseOrder.Discount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-4 col-lg">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-family:Verdana; font-weight:normal">Discount Amount</label>
+                                        <input id="FDiscount" asp-for="MPurchaseOrder.DiscountAmount" class="form-control" />
+                                        <span asp-validation-for="MPurchaseOrder.DiscountAmount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 col-md-4 col-lg">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-family:Verdana; font-weight:normal">Total Amount</label>
+                                        <input id="FTotal" asp-for="MPurchaseOrder.TotalAmount" class="form-control" onchange="GetTotal()"/>
+                                        <span asp-validation-for="MPurchaseOrder.TotalAmount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-4 col-lg">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-family:Verdana; font-weight:normal">Net Amount</label>
+                                        <input id="FNetAmount" asp-for="MPurchaseOrder.NetAmount" class="form-control" />
+                                        <span asp-validation-for="MPurchaseOrder.NetAmount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 col-md-4 col-lg">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-family:Verdana; font-weight:normal">Currency</label>
+                                        <select asp-for="MPurchaseOrder.Currency" class="form-control">
+                                            <option value="Select">--Select Currency--</option>
+                                            <option value="USD">USD</option>
+                                            <option value="EUR">EUR</option>
+                                            <option value="INR">INR</option>
+                                            <option value="GBP">GBP</option>
+                                        </select>
+                                        <span asp-validation-for="MPurchaseOrder.Currency" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-4 col-lg">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-family:Verdana; font-weight:normal">PO Status</label>
+                                        <select asp-for="MPurchaseOrder.PO_Status" class="form-control">
+                                            <option value="Select">--Select Status--</option>
+                                            <option value="Pending">Pending</option>
+                                            <option value="Approved">Approved</option>
+                                            <option value="Rejected">Rejected</option>
+                                            <option value="Canceled">Canceled</option>
+                                        </select>
+                                        <span asp-validation-for="MPurchaseOrder.PO_Status" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 col-md-4 col-lg">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-family:Verdana; font-weight:normal">Approved By</label>
+                                        <input asp-for="MPurchaseOrder.Approved_By" class="form-control" />
+                                        <span asp-validation-for="MPurchaseOrder.Approved_By" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-4 col-lg">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-family:Verdana; font-weight:normal">Approved Date</label>
+                                        <input asp-for="MPurchaseOrder.Approved_Date" class="form-control" />
+                                        <span asp-validation-for="MPurchaseOrder.Approved_Date" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-10 col-md-10 col-lg">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-family:Verdana; font-weight:normal">Remark</label>
+                                        <input asp-for="MPurchaseOrder.Remark" class="form-control" />
+                                        <span asp-validation-for="MPurchaseOrder.Remark" class="text-danger"></span>
+                                    </div>
+                                </div>                                
+                            </div>
+                             <div class="row">
+                                <div class="form-group">
+                                    <div>
+                                         <input type="submit" value="Save" class="btn btn-primary" />
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    
+                </div>               
+            </div>
+    </form>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@* <script>
+    let rowIndex = 1; // starts after the default row (0)
+
+    $("#addRowBtn").click(function () {
+
+        let newRow = `
+        <tr>
+            <td>
+                <select name="Items[${rowIndex}].MaterialId" class="form-control material-dd">                    
+                    ${materialOptions()}
+                </select>
+            </td>
+            <td>
+                <input type="text" name="Items[${rowIndex}].UOM" class="form-control" placeholder="UOM" />
+            </td>
+            <td>
+                <input type="text" name="Items[${rowIndex}].Quantity" class="form-control qty" />
+            </td>
+            <td>
+                <input type="text" name="Items[${rowIndex}].Rate" class="form-control" placeholder="Rate" />
+            </td>
+            <td>
+                <input type="text" name="Items[${rowIndex}].Amount" class="form-control" placeholder="Amount" />
+            </td>
+        </tr>
+        `;
+
+        $("#poTable tbody").append(newRow);
+        rowIndex++;   // increase for next row
+    });
+
+    // Function returns all dropdown options
+    function materialOptions() {
+        return `
+        @foreach (var m in Model.MMetarials)
+        {
+            @: <option value="@m.PkMatId">@m.MatCode - @m.MatName</option>
+        }
+        `;
+    }
+</script> *@
+ 
+
+
