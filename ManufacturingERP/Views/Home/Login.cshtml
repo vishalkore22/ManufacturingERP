@@ -1,0 +1,53 @@
+﻿@model ManufacturingERP.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <form asp-action="Login">
+        <div class="col-sm-12 col-md-12">
+            <div class="row form-grop">
+                <div class="col-sm-4 col-md-4">
+                    <div class="card">
+                        <div class="card-header text-white" style="background-color:#0B3F7B">
+                            Login
+                        </div>
+                        <div class="card-body">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Area" class="control-label"></label>
+                                <input asp-for="Area" class="form-control" value="User" />
+                                <span asp-validation-for="Area" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" value="vishal.kore22@outlook.com" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password" class="control-label"></label>
+                                <input asp-for="Password" class="form-control" value="Vishal111#" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Login" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <img class="img-fluid" src="~/images/login.png" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
