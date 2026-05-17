@@ -1,0 +1,15 @@
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\ManufacturingERP_Application\bin\Debug\net8.0\ManufacturingERP_Application.deps.json
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\ManufacturingERP_Application\bin\Debug\net8.0\ManufacturingERP_Application.dll
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\ManufacturingERP_Application\bin\Debug\net8.0\ManufacturingERP_Application.pdb
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\ManufacturingERP_Application\bin\Debug\net8.0\Manufacturing_Core.dll
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\ManufacturingERP_Application\bin\Debug\net8.0\Manufacturing_Core.pdb
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\ManufacturingERP_Application\obj\Debug\net8.0\ManufacturingERP_Application.csproj.AssemblyReference.cache
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\ManufacturingERP_Application\obj\Debug\net8.0\ManufacturingERP_Application.GeneratedMSBuildEditorConfig.editorconfig
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\ManufacturingERP_Application\obj\Debug\net8.0\ManufacturingERP_Application.AssemblyInfoInputs.cache
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\ManufacturingERP_Application\obj\Debug\net8.0\ManufacturingERP_Application.AssemblyInfo.cs
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\ManufacturingERP_Application\obj\Debug\net8.0\ManufacturingERP_Application.csproj.CoreCompileInputs.cache
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\ManufacturingERP_Application\obj\Debug\net8.0\Manufact.37B077A5.Up2Date
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\ManufacturingERP_Application\obj\Debug\net8.0\ManufacturingERP_Application.dll
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\ManufacturingERP_Application\obj\Debug\net8.0\refint\ManufacturingERP_Application.dll
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\ManufacturingERP_Application\obj\Debug\net8.0\ManufacturingERP_Application.pdb
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\ManufacturingERP_Application\obj\Debug\net8.0\ref\ManufacturingERP_Application.dll
