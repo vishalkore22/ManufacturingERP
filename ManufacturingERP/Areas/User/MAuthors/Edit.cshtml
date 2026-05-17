@@ -1,0 +1,53 @@
+﻿@model Manufacturing_Core.Entity.MAuthors
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <form asp-action="Edit">
+        <div class="form-group">
+            <div class="col-sm-12 col-md-12 col-lg">
+                <div class="card">
+                    <div class="card-header text-white" style="width:80%; height:65px; background-color:orangered; margin-left:100px; margin-top:-30px;">Edit Authors</div>
+                    <div class="card-body">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <input type="hidden" asp-for="AuthorID" />
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg">
+                                <div class="form-group">
+                                    <label class="control-label" for="AccountTypeId" style="font-family:Verdana; font-weight:normal">Author Id</label>
+                                    @Html.TextBox("Author ID.", Model.AuthorID, new { @class = "form-control", @readonly = "readonly" })
+                                    <span asp-validation-for="AuthorID" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg">
+                                <div class="form-group">
+                                    <label asp-for="Name" class="control-label" style="font-family:Verdana; font-weight:normal"></label>
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg">
+                                <div class="form-group">
+                                    <label asp-for="Bio" class="control-label" style="font-family:Verdana; font-weight:normal"></label>
+                                    <input asp-for="Bio" class="form-control" />
+                                    <span asp-validation-for="Bio" class="text-danger"></span>
+                                </div>
+                            </div>                            
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="submit" value="Update" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

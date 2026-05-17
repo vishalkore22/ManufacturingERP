@@ -1,0 +1,19 @@
+﻿@model Manufacturing_Core.ViewModels.PurchaseOrderViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>PurchaseOrderViewModel</h4>
+    <hr />
+    <dl class="row">
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MPurchaseOrder.PO_ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

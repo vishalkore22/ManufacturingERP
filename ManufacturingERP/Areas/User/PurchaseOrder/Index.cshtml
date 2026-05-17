@@ -1,0 +1,155 @@
+﻿@model Manufacturing_Core.ViewModels.PurchaseOrderViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Message = TempData["Action"];
+}
+
+<script>
+$('.po-status').on('change', function () {
+
+    var poId = $(this).data('id');
+    var newStatus = $(this).val();
+    var oldStatus = $(this).data('old');
+    var dropdown = $(this);
+
+    if (newStatus === "Rejected") {
+        if (confirm("Are you sure you want to reject and delete this Purchase Order?")) {
+
+            $.ajax({
+                url: '/PurchaseOrder/RejectPurchaseOrder',
+                type: 'POST',
+                data: { id: poId },
+                success: function () {
+                    alert("Purchase Order rejected and moved to deleted records.");
+                    location.reload();
+                }
+            });
+
+        } else {
+            dropdown.val(oldStatus); // revert selection
+        }
+    }
+    else {
+        // Normal status update
+        $.post('/PurchaseOrder/UpdateStatus', {
+            id: poId,
+            status: newStatus
+        });
+
+        dropdown.data('old', newStatus);
+    }
+});
+</script>
+
+
+
+<div class="row container">
+    <div class="form-group">
+        <div class="col-sm-12 col-md-12 col-lg">
+            <div class="card">
+                <div class="card-header text-white" style="width:80%; height:65px; background-color:orangered; margin-left:100px; margin-top:-30px;">View Ledger Information</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (ViewBag.Message == "Create")
+                            {
+                                <div class="alert alert-success">
+                                    <strong>@TempData["AlertMessage"]</strong>
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        <span>&times;</span>
+                                    </button>
+                                </div>
+                            }
+                            else if (ViewBag.Message == "Edit")
+                            {
+                                <div class="alert alert-info">
+                                    <strong>@TempData["AlertMessage"]</strong>
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        <span>&times;</span>
+                                    </button>
+                                </div>
+                            }
+                            else if (ViewBag.Message == "Delete")
+                            {
+                                <div class="alert alert-danger">
+                                    <strong>@TempData["AlertMessage"]</strong>
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        <span>&times;</span>
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <p>
+                            <a asp-action="Create">Create New</a>
+                        </p>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.MPurchaseOrder.PO_ID)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.MPurchaseOrder.PO_Number)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.MPurchaseOrder.PO_Date)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.MPurchaseOrder.Supplier_ID)
+                                </th>                                
+                                <th>
+                                    @Html.DisplayNameFor(model => model.MPurchaseOrder.PO_Status)
+                                </th>                                
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.ListMPurchaseOrders != null)
+                            {
+                                @foreach (var item in Model.ListMPurchaseOrders)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PO_ID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PO_Number)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PO_Date)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Supplier_ID)
+                                        </td>
+                                        <td>
+                                            <select class="form-control po-status" data-id="@item.PO_ID">
+                                                <option value="Select">--Select Status--</option>
+                                                <option value="Pending"  selected="@(item.PO_Status == "Pending")">Pending</option>
+                                                <option value="Approved" selected="@(item.PO_Status == "Approved")">Approved</option>
+                                                <option value="Rejected" selected="@(item.PO_Status == "Rejected")">Rejected</option>
+                                                <option value="Canceled" selected="@(item.PO_Status == "Canceled")">Canceled</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.PO_ID">Edit</a> |
+                                            <a asp-action="Details" asp-route-id="@item.PO_ID">Details</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.PO_ID">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
