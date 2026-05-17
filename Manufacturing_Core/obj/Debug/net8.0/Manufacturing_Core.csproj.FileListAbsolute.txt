@@ -1,0 +1,14 @@
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\Manufacturing_Core\bin\Debug\net8.0\Manufacturing_Core.deps.json
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\Manufacturing_Core\bin\Debug\net8.0\Manufacturing_Core.runtimeconfig.json
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\Manufacturing_Core\bin\Debug\net8.0\Manufacturing_Core.dll
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\Manufacturing_Core\bin\Debug\net8.0\Manufacturing_Core.pdb
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\Manufacturing_Core\obj\Debug\net8.0\Manufacturing_Core.csproj.AssemblyReference.cache
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\Manufacturing_Core\obj\Debug\net8.0\Manufacturing_Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\Manufacturing_Core\obj\Debug\net8.0\Manufacturing_Core.AssemblyInfoInputs.cache
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\Manufacturing_Core\obj\Debug\net8.0\Manufacturing_Core.AssemblyInfo.cs
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\Manufacturing_Core\obj\Debug\net8.0\Manufacturing_Core.csproj.CoreCompileInputs.cache
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\Manufacturing_Core\obj\Debug\net8.0\Manufacturing_Core.dll
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\Manufacturing_Core\obj\Debug\net8.0\refint\Manufacturing_Core.dll
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\Manufacturing_Core\obj\Debug\net8.0\Manufacturing_Core.pdb
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\Manufacturing_Core\obj\Debug\net8.0\Manufacturing_Core.genruntimeconfig.cache
+E:\2024 Letest Projects\ManufacturingERP\ManufacturingERP\Manufacturing_Core\obj\Debug\net8.0\ref\Manufacturing_Core.dll
